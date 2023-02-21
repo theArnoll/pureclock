@@ -13,6 +13,7 @@ table {
     height: 97.8vh;
     font-weight: bold;
     text-align: center;
+    top: auto;
 }
 
 th {
