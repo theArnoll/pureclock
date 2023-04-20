@@ -22,7 +22,7 @@ document.addEventListener('keydown', (event) => {
 // https://www.section.io/engineering-education/keyboard-events-in-javascript/
 
 let det = new Date;
-var lastHr = det.getHours();
+var lastHr = 25;
 let url = new URLSearchParams(window.location.search);
 
 function main()
@@ -55,19 +55,20 @@ function main()
     
     if(lastHr != time.getHours())
     {
-        if(url.has('oledProtection') && url.get('oledProtection') == 0)
+        if((url.has('oledProtection') && url.get('oledProtection') == 0) || (url.has('oled') && url.get('oled') == 0))
         {
             console.log("Oled Protection Disabled.");
         }
         else
         {
-            oledProtection();
-            lastHr = time.getHours();
+            if(lastHr != 25) oledProtection();
         }
-    }
 
-    setTimeout(function(){ main() },200);
+        lastHr = time.getHours();
+    }
 }
+
+setInterval(main ,200);
 
 function oledProtection(){
     document.getElementById('table').style.position = "relative";
