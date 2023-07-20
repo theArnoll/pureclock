@@ -35,8 +35,8 @@ th {
     top: 50%; /*center*/
     left: 50%; /*center*/
     transform: translate(-50%, -50%); /*center*/
-    height: 15vh;
     width: 55vw;
+    padding: 2vw;
     z-index: 1;
 
     font-size: 2vw;
