@@ -15,7 +15,7 @@ Press these key to usu these function:\
 `c` - Change clock's color randomly <br>
 \
 Or you can ignore these function, too!\
-It's already a nice clock even if you don't configure anything.\
+It's already a nice clock even if you don't configure anything.
 
 Link:\
 [theArnoll.github.io/pureclock](https://theArnoll.github.io/pureclock)\
