@@ -1,5 +1,3 @@
----
-
 # pureclock
 Just a pure dark clock. 12hr.
 
