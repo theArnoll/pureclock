@@ -17,8 +17,8 @@ Press these key to usu these function:\
 `w` - Switch clock's color between White and Default <br>
 `c` - Change clock's color randomly in 8 colors <br>
 \
-Add "?oled=0" on the end of the URL to disable oled protection (Change position randomly every hour)<br>
-Add "?color=[Color Hex code without '#' symble]" on the end of the URL to set color of the clock <br>
+Add `?oled=0` on the end of the URL to disable oled protection (Change position randomly every hour)<br>
+Add `?color=[Color Hex code without '#' symble]` on the end of the URL to set color of the clock <br>
 If you want to use both, you can type like "[URL]?oled=0&color=71a1f0".\
 \
 Or you can ignore these function, too!\

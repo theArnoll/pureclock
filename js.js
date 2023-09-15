@@ -85,15 +85,15 @@ function main()
 
         lastHr = time.getHours();
     }
+
+    if(url.has('color'))
+    {
+        var color = url.get('color');
+        document.getElementsByClassName('clock')[0].style.color = '#' + color;
+        console.log("Setted color to " + color);
+    }
 }
 
-// ---------------------------------
-if(url.has('color'))
-{
-    var color = url.get('color');
-    document.getElementsByClassName('clock')[0].style.color = '#' + color;
-    console.log("Setted color to " + color);
-}
 setInterval(main ,200);
 
 function oledProtection(){
