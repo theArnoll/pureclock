@@ -91,7 +91,7 @@ function main()
 if(url.has('color'))
 {
     var color = url.get('color');
-    document.getElementsByClassName('clock')[0].style.color = color;
+    document.getElementsByClassName('clock')[0].style.color = '#' + color;
     console.log("Setted color to " + color);
 }
 setInterval(main ,200);
