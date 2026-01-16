@@ -12,7 +12,6 @@ table {
     font-weight: bold;
     text-align: center;
     top: auto;
-    z-index: -1;
 }
 
 th {
@@ -37,18 +36,8 @@ th {
     transform: translate(-50%, 0%); /*center*/
     width: 55vw;
     padding: 2vw;
-    z-index: -1;
 
-    font-size: 2vw;
-
-    border: #AAA 0.3vw solid;
-    border-radius: 1vw;
-    background-color: rgba(17, 17, 17, 0.75);
-    opacity: 0;
-    
-    display: flex;
-    justify-content: center; /* 將內容水平置中 */
-    align-items: center; /* 將內容垂直置中 */
+    text-align: center;
 
     animation-name: onstrt;
     animation-duration: 2.5s;
@@ -81,18 +70,24 @@ th {
     transform: translate(-50%, 0%); /* center */
     width: 55vw;
     padding: 2vw;
-    z-index: 1;
 
-    font-size: 2vw;
+    pointer-events: none;
+}
 
+.overlay
+{
     border: #AAA 0.3vw solid;
     border-radius: 1vw;
     background-color: rgba(17, 17, 17, 0.75);
     opacity: 0;
-    
-    display: flex;
-    justify-content: center; /* 將內容水平置中 */
-    align-items: center; /* 將內容垂直置中 */
 
-    pointer-events: none;
+    font-size: 2vw;
+}
+
+.buttonLook {
+    border: 1px #AAA solid;
+    border-radius: 0.5ex;
+    padding-left: 0.3ex;
+    padding-right: 0.3ex;
+    background-color: #282828;
 }

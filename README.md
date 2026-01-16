@@ -1,27 +1,36 @@
 # pureclock
+
 Just a pure dark clock. 12hr.
 
 [Click here to open the clock](https://theArnoll.github.io/pureclock)
 
----
+## Functions
 
-### 1.4 version update
-#### Updates:
-Improve Performance  
-Add `f` key to toggle font, and make font changing a toggle event  
-Update pop out event and layout
+| Keyboard keys | Screen tap | Functions |
+| ------------- | ---------- | --------- |
+| `f` `1` `2` | Hour | Toggle font style |
+| `m` | Minute | Show / Hide this manual |
+| `w` | Second (Left) | Toggle White / Gray color |
+| `c` | Second (Right) | Random color (8 colors) |
 
-#### Functions:
-Press these key to usu these function:\
-`1` `2` `f` - Toggle font between regular and gorgeous <br>
-`m` - Show / Hide manual <br>
-`w` - Switch clock's color between White and Default <br>
-`c` - Change clock's color randomly in 8 colors <br>
-\
-Add `?oled=0` on the end of the URL to disable oled protection (Change position randomly every hour)<br>
-Add `?color=[Color Hex code without '#' symble]` on the end of the URL to set color of the clock <br>
-If you want to use both, you can type like "[URL]?oled=0&color=71a1f0".\
-\
+### CUSTOMIZE SETTINGS
+
+You can save settings by modifying the link in your browser's address bar:  
+
+1. Disable Position Shift  
+    The position shifting every hour is for OLED screen protection.  
+    If you want to disable it,  
+    add <code>?oled=0</code> to the end.  
+    Example: ```.../clock.html?oled=0```
+
+2. Set Custom Color  
+    Add <code>?color=ColorCode</code> (Use 6-digit hex code, no '#').  
+    Example: ```.../clock.html?color=71A1F0```
+
+3. Use Both  
+    Connect them with an '<code>&</code>' symbol.  
+    Example: ```.../clock.html?oled=0&color=71A1F0```
+
 Or you can ignore these function, too!\
 It's already a nice clock even if you don't configure anything.
 
@@ -29,3 +38,15 @@ Link:\
 [theArnoll.github.io/pureclock](https://theArnoll.github.io/pureclock)\
 or\
 [pse.is/pureclock](https://pse.is/pureclock)
+
+---
+
+## v.1.5 update: UX Update
+
+### Improved touchscreen experience
+
+Keyboard is no longer required for configuration.
+
+### Modify pop out info
+
+Formatted everything to make it easier to read.

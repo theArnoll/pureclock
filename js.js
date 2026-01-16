@@ -1,9 +1,9 @@
 // let det = new Date;
 var lastHr = 25, lastSec = -1;
 var fontTog = true, colorTog = true, manualTog = false;
-let url = new URLSearchParams(window.location.search);
-// var screen = '';
-document.getElementsByClassName('clock')[0].style.color = "#AAA";
+var url = new URLSearchParams(window.location.search);
+var screen = '';
+const touchable = navigator.maxTouchPoints;
 
 const hrI = document.getElementById('hrI');
 const hrII = document.getElementById('hrII');
@@ -13,7 +13,35 @@ const scI = document.getElementById('scI');
 const scII = document.getElementById('scII');
 const colon = document.getElementsByTagName('td');
 
-requestAnimationFrame(main);
+// requestAnimationFrame(main);
+screenOrient();
+document.getElementsByClassName('clock')[0].style.color = "#AAA";
+if(screen == 'v')
+{
+    let overlay = document.getElementsByClassName('overlay');
+    if(touchable == 0)
+    {
+        for(let re = 0; re < overlay.length; re++)
+        {
+            overlay[re].style.fontSize = "3vw";
+            overlay[re].style.border = "#AAA 0.5vw solid";
+            overlay[re].style.borderRadius = "2vw";
+            overlay[re].style.padding = "3vw";
+            overlay[re].style.width = "80vw";
+        }
+    }
+    else
+    {
+        for(let re = 0; re < overlay.length; re++)
+        {
+            overlay[re].style.fontSize = "4vw";
+            overlay[re].style.border = "#AAA 1vw solid";
+            overlay[re].style.borderRadius = "3vw";
+            overlay[re].style.padding = "4vw";
+            overlay[re].style.width = "80vw";
+        }
+    }
+}
 
 if(url.has('color'))
 {
@@ -40,17 +68,6 @@ function main()
 
     if(time.getMilliseconds() == 0)
         console.log("Lucky 0 easteregg!");
-
-    if(window.innerHeight > window.innerWidth){
-        colon[0].style.width = "3vw"; colon[1].style.width = "3vw";
-        colon[0].innerText = ""; colon[1].innerText = "";
-        // screen = 'v';
-    }
-    else{
-        colon[0].style.width = "6vw"; colon[1].style.width = "6vw";
-        colon[0].innerText = ":"; colon[1].innerText = ":";
-        // screen = 'h'
-    }
     
     if(lastHr != time.getHours())
     {
@@ -83,6 +100,8 @@ function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Ran
     switch (key) {
         case 1:
         case 'f':
+        case '1':
+        case '2':
             if (fontTog)
             {
                 document.getElementsByTagName('body')[0].style.fontFamily="Alexandria";
@@ -103,25 +122,41 @@ function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Ran
             document.getElementsByClassName('manual')[0].style.opacity = (document.getElementsByClassName('manual')[0].style.opacity == 0 ? 1 : 0);
             if(manualTog)
             {
-                document.getElementsByClassName('manual')[0].innerHTML=
-                "-- MANUAL -- <br>" +
-                "! Currently all operations required keyboard. ! <br>" +
-                "<br>" +
-                "f - Toggle font between regular and gorgeous <br>" +
-                "m - Show / Hide this manual <br>" +
-                "w - Switch clock's color between White and Default <br>" +
-                "c - Change clock's color randomly in 8 colors<br>" +
-                "<br>" +
-                "Add \"?oled=0\" on the end of the URL to disable oled protection (Change position randomly every hour)<br>" +
-                "Add \"?color=[Color Hex code without '#' symble]\" on the end of the URL to set color of the clock <br>" +
-                "If you want to use both, you can type like \"[URL]?oled=0&color=71a1f0\".";
+                document.getElementsByClassName('manual')[0].innerHTML=`
+                    <b style="font-size:1.2em;">-- MANUAL --</b>
+                    <p>
+                    <span class="buttonLook"><code>f</code></span> - Toggle font style<br>
+                    <span class="buttonLook"><code>m</code></span> - Show / Hide this manual<br>
+                    <span class="buttonLook"><code>w</code></span> - Toggle White / Gray color<br>
+                    <span class="buttonLook"><code>c</code></span> - Random color (8 colors)<br>
+                    </p>
+                    ${!touchable ? ` <p>
+                        <b>For Touch Devices:</b><br>
+                        Tap Hour = Toggle Font<br>
+                        Tap Minute = Show Manual<br>
+                        Tap Second (Left) = Toggle White/Gray<br>
+                        Tap Second (Right) = Random Color<br> </p>` : ''}
+                    <p>
+                    <b>CUSTOMIZE SETTINGS</b><br>
+                    You can save settings by modifying the link in your browser's address bar:<br>
+                    </p> <p>
+                    <b>1. Disable Position Shift</b><br>
+                    <span style="font-size:0.8em;">The position shifting every hour is for OLED screen protection.<br>
+                    If you want to disable it,<br></span>
+                    add <code>?oled=0</code> to the end.<br>
+                    <span style="font-size:0.8em; color:#888;">Example: .../clock.html?oled=0</span><br>
+                    </p> <p>
+                    <b>2. Set Custom Color</b><br>
+                    Add <code>?color=ColorCode</code> (Use 6-digit hex code, no '#').<br>
+                    <span style="font-size:0.8em; color:#888;">Example: .../clock.html?color=71A1F0</span><br>
+                    </p>
+                    <b>3. Use Both</b><br>
+                    Connect them with an '<code>&</code>' symbol.<br>
+                    <span style="font-size:0.8em; color:#888;">Example: .../clock.html?oled=0&color=71A1F0</span>
+                `;
             }
             else
-            {
                 document.getElementsByClassName('manual')[0].innerHTML="";
-                document.getElementsByClassName('manual')[0].style.pointerEvents = "none";
-            }
-            
             break;
         case 3:
         case 'w':
@@ -141,34 +176,40 @@ function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Ran
     }
 }
 
+function screenOrient()
+{
+    let currScreen = (window.innerHeight > window.innerWidth) ? 'v' : 'h';
+    if(currScreen == screen) return; // No change
+
+    if(window.innerHeight > window.innerWidth){
+        colon[0].style.width = "3vw"; colon[1].style.width = "3vw";
+        colon[0].innerText = ""; colon[1].innerText = "";
+        screen = 'v';
+    }
+    else{
+        colon[0].style.width = "6vw"; colon[1].style.width = "6vw";
+        colon[0].innerText = ":"; colon[1].innerText = ":";
+        screen = 'h'
+    }
+}
+
 document.addEventListener('keydown', (event) => {
     var name = event.key;
     ctrl(name);
 }, false);
 // https://www.section.io/engineering-education/keyboard-events-in-javascript/
 
-hrI.addEventListener('click', () => {
-    ctrl(1); 
-});
-hrII.addEventListener('click', () => {
-    ctrl(1); 
-});
+hrI.addEventListener('click',  () => ctrl(1));
+hrII.addEventListener('click', () => ctrl(1));
 
-mnI.addEventListener('click', () => {
-    ctrl(2); 
-});
-mnII.addEventListener('click', () => {
-    ctrl(2); 
-});
+mnI.addEventListener('click',  () => ctrl(2));
+mnII.addEventListener('click', () => ctrl(2));
 
-scI.addEventListener('click', () => {
-    ctrl(3); 
-});
-scII.addEventListener('click', () => {
-    ctrl(4); 
-});
+scI.addEventListener('click',  () => ctrl(3));
+scII.addEventListener('click', () => ctrl(4));
 
-// 在你的 JS 最下面加上這段，幫所有可點擊元素加上手指游標
+window.addEventListener('resize', screenOrient);
+
 [hrI, hrII, mnI, mnII, scI, scII].forEach(el => {
     el.style.cursor = "pointer";
 });
