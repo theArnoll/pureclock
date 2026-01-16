@@ -3,7 +3,7 @@ var lastHr = 25, lastSec = -1;
 var fontTog = true, colorTog = true, manualTog = false;
 var url = new URLSearchParams(window.location.search);
 var screen = '';
-const touchable = navigator.maxTouchPoints;
+var touchable = navigator.maxTouchPoints;
 
 const hrI = document.getElementById('hrI');
 const hrII = document.getElementById('hrII');
@@ -13,35 +13,8 @@ const scI = document.getElementById('scI');
 const scII = document.getElementById('scII');
 const colon = document.getElementsByTagName('td');
 
-// requestAnimationFrame(main);
 screenOrient();
 document.getElementsByClassName('clock')[0].style.color = "#AAA";
-if(screen == 'v')
-{
-    let overlay = document.getElementsByClassName('overlay');
-    if(touchable == 0)
-    {
-        for(let re = 0; re < overlay.length; re++)
-        {
-            overlay[re].style.fontSize = "3vw";
-            overlay[re].style.border = "#AAA 0.5vw solid";
-            overlay[re].style.borderRadius = "2vw";
-            overlay[re].style.padding = "3vw";
-            overlay[re].style.width = "80vw";
-        }
-    }
-    else
-    {
-        for(let re = 0; re < overlay.length; re++)
-        {
-            overlay[re].style.fontSize = "4vw";
-            overlay[re].style.border = "#AAA 1vw solid";
-            overlay[re].style.borderRadius = "3vw";
-            overlay[re].style.padding = "4vw";
-            overlay[re].style.width = "80vw";
-        }
-    }
-}
 
 if(url.has('color'))
 {
@@ -119,18 +92,18 @@ function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Ran
         case 2:
         case 'm':
             manualTog = !manualTog;
-            document.getElementsByClassName('manual')[0].style.opacity = (document.getElementsByClassName('manual')[0].style.opacity == 0 ? 1 : 0);
+            document.getElementsByClassName('manual')[0].style.opacity = 
+                                        (document.getElementsByClassName('manual')[0].style.opacity == 0 ? 1 : 0);
             if(manualTog)
             {
                 document.getElementsByClassName('manual')[0].innerHTML=`
                     <b style="font-size:1.2em;">-- MANUAL --</b>
-                    <p>
-                    <span class="buttonLook"><code>f</code></span> - Toggle font style<br>
-                    <span class="buttonLook"><code>m</code></span> - Show / Hide this manual<br>
-                    <span class="buttonLook"><code>w</code></span> - Toggle White / Gray color<br>
-                    <span class="buttonLook"><code>c</code></span> - Random color (8 colors)<br>
-                    </p>
-                    ${!touchable ? ` <p>
+                    ${(innerHeight / innerWidth < 2.16) && !(window.matchMedia("(hover: none)").matches) ? `<p>
+                        <span class="buttonLook"><code>f</code></span> - Toggle font style<br>
+                        <span class="buttonLook"><code>m</code></span> - Show / Hide this manual<br>
+                        <span class="buttonLook"><code>w</code></span> - Toggle White / Gray color<br>
+                        <span class="buttonLook"><code>c</code></span> - Random color (8 colors)<br> </p>` : ''}
+                    ${touchable ? ` <p>
                         <b>For Touch Devices:</b><br>
                         Tap Hour = Toggle Font<br>
                         Tap Minute = Show Manual<br>
@@ -185,6 +158,32 @@ function screenOrient()
         colon[0].style.width = "3vw"; colon[1].style.width = "3vw";
         colon[0].innerText = ""; colon[1].innerText = "";
         screen = 'v';
+
+        let overlay = document.getElementsByClassName('overlay');
+        if(touchable == 0)
+        {
+            document.getElementsByClassName('manual')[0].style.fontSize = "2.2vh";
+            document.getElementsByClassName('onstrt')[0].style.fontSize = "4.6vw";
+            for(let re = 0; re < overlay.length; re++)
+            {
+                overlay[re].style.border = "#AAA 0.5vw solid";
+                overlay[re].style.borderRadius = "2vw";
+                overlay[re].style.padding = "3vw";
+                overlay[re].style.width = "75vw";
+            }
+        }
+        else
+        {
+            document.getElementsByClassName('manual')[0].style.fontSize = "2.2vh";
+            document.getElementsByClassName('onstrt')[0].style.fontSize = "5vw";
+            for(let re = 0; re < overlay.length; re++)
+            {
+                overlay[re].style.border = "#AAA 1vw solid";
+                overlay[re].style.borderRadius = "3vw";
+                overlay[re].style.padding = "4vw";
+                overlay[re].style.width = "80vw";
+            }
+        }
     }
     else{
         colon[0].style.width = "6vw"; colon[1].style.width = "6vw";

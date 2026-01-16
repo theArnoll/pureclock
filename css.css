@@ -31,12 +31,13 @@ th {
 
 .onstrt {
     position: absolute;
-    top: 10%;
+    top: 5%;
     left: 50%; /*center*/
     transform: translate(-50%, 0%); /*center*/
     width: 55vw;
     padding: 2vw;
 
+    font-size: 2vw;
     text-align: center;
 
     animation-name: onstrt;
@@ -52,7 +53,7 @@ th {
         opacity: 1;
     }
     10%{
-        top: 10%;
+        top: 5%;
         opacity: 1;
     }
     80%{
@@ -65,11 +66,13 @@ th {
 
 .manual {
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     left: 50%; /*center*/
     transform: translate(-50%, 0%); /* center */
-    width: 55vw;
+    width: 60vw;
     padding: 2vw;
+
+    font-size: 2.8vh;
 
     pointer-events: none;
 }
@@ -80,8 +83,6 @@ th {
     border-radius: 1vw;
     background-color: rgba(17, 17, 17, 0.75);
     opacity: 0;
-
-    font-size: 2vw;
 }
 
 .buttonLook {

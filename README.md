@@ -41,12 +41,20 @@ or\
 
 ---
 
-## v.1.5 update: UX Update
+## v.1.5 Update: UX Update
 
-### Improved touchscreen experience
+### Improved Touchscreen Experience
 
 Keyboard is no longer required for configuration.
 
-### Modify pop out info
+### Modify Pop Out Info
 
 Formatted everything to make it easier to read.
+
+## v.1.5.1 Patch: Experience Balancing
+
+### Rearranged overlay text size strategy
+
+Make the manual view stay in the screen on desktop / landscape screen.
+
+Removed keyboard instruction in manual view on mobile device (devices with touch screen, not able to hover)
