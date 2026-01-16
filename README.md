@@ -5,14 +5,15 @@ Just a pure dark clock. 12hr.
 
 ---
 
-### 1.3 version update
-#### New function:
-Add "?color=[Color Hex code without '#' symble]" on the end of the URL to set color of the clock
+### 1.4 version update
+#### Updates:
+Improve Performance  
+Add `f` key to toggle font, and make font changing a toggle event  
+Update pop out event and layout
 
 #### Functions:
 Press these key to usu these function:\
-`1` - Switch font to regular <br>
-`2` - Switch font to gorgeous <br>
+`1` `2` `f` - Toggle font between regular and gorgeous <br>
 `m` - Show / Hide manual <br>
 `w` - Switch clock's color between White and Default <br>
 `c` - Change clock's color randomly in 8 colors <br>
