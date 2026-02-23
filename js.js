@@ -53,22 +53,56 @@ function main()
     }
 }
 
+let lastCW = 0;
+
+function oledProtectionDebug()
+{
+    const rect = document.getElementById('table').getBoundingClientRect();
+    const clockW = Math.ceil(rect.width), clockH = Math.ceil(rect.height);
+    if (lastCW == 0) lastCW = clockW;
+
+    const field = document.getElementById('field').getBoundingClientRect(); // originally visualViewport.width
+    const fieldW = Math.ceil(field.width), fieldH = Math.ceil(field.height);
+
+    const maxLeft = (fieldW - clockW) / 2, minLeft = -maxLeft;
+    const maxTop = (fieldH - clockH) / 2, minTop = -maxTop;
+
+    const randL = Math.floor(Math.random() * (maxLeft - minLeft + 1) + minLeft);
+    const randT = Math.floor(Math.random() * (maxTop - minTop + 1) + minTop);
+
+    document.getElementById('field').style.background = "#400";
+    document.getElementById('table').style.background = "#040";
+    const sequence = ["hrI", "hrII", "mnI", "mnII", "scI", "scII"];
+    for (let re = 0; re < sequence.length; re++) {
+        const element = sequence[re];
+        document.getElementById(element).style.background = (lastCW == clockW ? "#004" : "#404");
+    }
+
+    // document.getElementById('table').style.left = randL + "px";
+    // document.getElementById('table').style.top = randT + "px";
+    document.getElementById('table').style.transform = `translate(${randL}px, ${randT}px)`;
+    console.log("Position Shifted to (" + randL + ", " + randT + ")\nMax position is" + "(" + maxLeft + ", " + maxTop + ")\nClock size is (" + clockW + ", " + clockH + ")\nScreen size is (" + fieldW + ", " + fieldH + ")" + (lastCW > clockW ? ("\n! Squeezed "+(lastCW-clockW)+" px") : ""));
+    lastCW = clockW;
+}
+
 function oledProtection()
 {
     const rect = document.getElementById('table').getBoundingClientRect();
     const clockW = rect.width, clockH = rect.height;
 
-    const maxLeft = Math.max(0, window.innerWidth - clockW);
-    const maxTop = Math.max(0, window.innerHeight - clockH);
+    const field = document.getElementById('field').getBoundingClientRect(); // originally visualViewport.width
+    const fieldW = Math.ceil(field.width), fieldH = Math.ceil(field.height);
 
-    const randL = Math.floor(Math.random() * maxLeft);
-    const randT = Math.floor(Math.random() * maxTop);
+    const maxLeft = (fieldW - clockW) / 2, minLeft = -maxLeft;
+    const maxTop = (fieldH - clockH) / 2, minTop = -maxTop;
 
-    document.getElementById('table').style.left = randL + "px";
-    document.getElementById('table').style.top = randT + "px";
+    const randL = Math.floor(Math.random() * (maxLeft - minLeft + 1) + minLeft);
+    const randT = Math.floor(Math.random() * (maxTop - minTop + 1) + minTop);
+
+    document.getElementById('table').style.transform = `translate(${randL}px, ${randT}px)`;
 }
 
-function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Random
+function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Random, 5 = OLED Protection Debug
 {
     switch (key) {
         case 1:
@@ -102,7 +136,8 @@ function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Ran
                         <span class="buttonLook"><code>f</code></span> - Toggle font style<br>
                         <span class="buttonLook"><code>m</code></span> - Show / Hide this manual<br>
                         <span class="buttonLook"><code>w</code></span> - Toggle White / Gray color<br>
-                        <span class="buttonLook"><code>c</code></span> - Random color (8 colors)<br> </p>` : ''}
+                        <span class="buttonLook"><code>c</code></span> - Random color (8 colors)<br>
+                        <span class="buttonLook"><code>r</code></span> - Turn on OLED protection debug mode<br> </p>` : ''}
                     ${touchable ? ` <p>
                         <b>For Touch Devices:</b><br>
                         Tap Hour = Toggle Font<br>
@@ -143,6 +178,10 @@ function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Ran
         case 'c':
             const tableColor = ["#AAA", "#FFF", "#F00", "#0F0", "#00F", "#FF0", "#0FF", "#F0F"];
             document.getElementsByClassName('clock')[0].style.color = tableColor[Math.floor(Math.random() * 8)];
+            break;
+        case 5:
+        case 'r':
+            oledProtectionDebug();
             break;
         default:
             break;
