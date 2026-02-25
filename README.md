@@ -8,7 +8,8 @@ Just a pure dark clock. 12hr.
 
 | Keyboard keys | Screen tap | Functions |
 | ------------- | ---------- | --------- |
-| `f` `1` `2` | Hour | Toggle font style |
+| `f` | Hour (Left) | Toggle fullscreen |
+| `t` `1` `2` | Hour (Right) | Toggle font style |
 | `m` | Minute | Show / Hide this manual |
 | `w` | Second (Left) | Toggle White / Gray color |
 | `c` | Second (Right) | Random color (8 colors) |
@@ -41,6 +42,8 @@ or\
 
 ---
 
+# Changelog (since v.1.5)
+
 ## v.1.5 Update: UX Update
 
 ### Improved Touchscreen Experience
@@ -58,3 +61,17 @@ Formatted everything to make it easier to read.
 Make the manual view stay in the screen on desktop / landscape screen.
 
 Removed keyboard instruction in manual view on mobile device (devices with touch screen, not able to hover)
+
+## v.1.6 Update: UI refining
+
+### Prevented text space squeezing
+
+Changed position shifting method for OLED protection to prevent the space squeezing situation when the clock text is going close to the right edge.
+
+## v.1.7 Update: Fullscreen Update
+
+### Added fullscreen toggle in the website
+
+This update focuses primarily on mobile devices. Hiding the address bar has become even harder since the last update, and it has never been possible to achieve a true fullscreen experience on mobile devices before this update. Therefore, I added a fullscreen toggle to resolve these issues.
+
+> iOS Safari may not support toggling fullscreen mode by tapping the left digit of the hour part, and a fix is not currently planned. Pull requests are welcome.

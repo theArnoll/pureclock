@@ -102,11 +102,26 @@ function oledProtection()
     document.getElementById('table').style.transform = `translate(${randL}px, ${randT}px)`;
 }
 
+function fullscreenToggle()
+{
+    if (!document.fullscreenElement)
+    {
+        document.documentElement.requestFullscreen().catch(err => {
+            console.error(`Unable to enter fullscreen mode: ${err.message}`);
+        });
+    }
+    else
+    {
+        if (document.exitFullscreen)
+            document.exitFullscreen();
+    }
+}
+
 function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Random, 5 = OLED Protection Debug
 {
     switch (key) {
         case 1:
-        case 'f':
+        case 't':
         case '1':
         case '2':
             if (fontTog)
@@ -133,14 +148,14 @@ function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Ran
                 document.getElementsByClassName('manual')[0].innerHTML=`
                     <b style="font-size:1.2em;">-- MANUAL --</b>
                     ${(innerHeight / innerWidth < 2.16) && !(window.matchMedia("(hover: none)").matches) ? `<p>
-                        <span class="buttonLook"><code>f</code></span> - Toggle font style<br>
+                        <span class="buttonLook"><code>t</code></span> - Toggle font style<br>
                         <span class="buttonLook"><code>m</code></span> - Show / Hide this manual<br>
                         <span class="buttonLook"><code>w</code></span> - Toggle White / Gray color<br>
                         <span class="buttonLook"><code>c</code></span> - Random color (8 colors)<br>
-                        <span class="buttonLook"><code>r</code></span> - Turn on OLED protection debug mode<br> </p>` : ''}
+                        <span class="buttonLook"><code>f</code></span> - Toggle Fullscreen mode<br> </p>` : ''}
                     ${touchable ? ` <p>
                         <b>For Touch Devices:</b><br>
-                        Tap Hour = Toggle Font<br>
+                        Tap Hour (Left / Right) = Toggle Fullscreen / Font<br>
                         Tap Minute = Show Manual<br>
                         Tap Second (Left) = Toggle White/Gray<br>
                         Tap Second (Right) = Random Color<br> </p>` : ''}
@@ -180,6 +195,10 @@ function ctrl(key)  // 1 = Font, 2 = Manual, 3 = Color White/Gray, 4 = Color Ran
             document.getElementsByClassName('clock')[0].style.color = tableColor[Math.floor(Math.random() * 8)];
             break;
         case 5:
+        case 'f':
+            fullscreenToggle();
+            break;
+        case 7:
         case 'r':
             oledProtectionDebug();
             break;
@@ -237,7 +256,7 @@ document.addEventListener('keydown', (event) => {
 }, false);
 // https://www.section.io/engineering-education/keyboard-events-in-javascript/
 
-hrI.addEventListener('click',  () => ctrl(1));
+hrI.addEventListener('click',  () => ctrl(5));
 hrII.addEventListener('click', () => ctrl(1));
 
 mnI.addEventListener('click',  () => ctrl(2));

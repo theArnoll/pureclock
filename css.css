@@ -23,7 +23,7 @@ th {
 .clock {
     position: relative;
     width: 100%;
-    height: 98dvh; /* 可視視口高度 */
+    height: 98dvh; /* The height of visible viewport */
     display: flex;
     justify-content: center;
     align-items: center;
