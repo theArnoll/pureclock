@@ -75,3 +75,7 @@ Changed position shifting method for OLED protection to prevent the space squeez
 This update focuses primarily on mobile devices. Hiding the address bar has become even harder since the last update, and it has never been possible to achieve a true fullscreen experience on mobile devices before this update. Therefore, I added a fullscreen toggle to resolve these issues.
 
 > iOS Safari may not support toggling fullscreen mode by tapping the left digit of the hour part, and a fix is not currently planned. Pull requests are welcome.
+
+## v.1.7.1 Patch: Touchscreen Fullscreen UX refining
+
+Fixing the accidentally character choosing when toggling fullscreen on mobile device by adding a 0.1 second delay after tapping the digit.

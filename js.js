@@ -102,8 +102,13 @@ function oledProtection()
     document.getElementById('table').style.transform = `translate(${randL}px, ${randT}px)`;
 }
 
-function fullscreenToggle()
+function wait(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fullscreenToggle()
 {
+    await wait(100);
     if (!document.fullscreenElement)
     {
         document.documentElement.requestFullscreen().catch(err => {
